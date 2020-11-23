@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+<context:property-placeholder location="classpath:config/application.properties"></context:property-placeholder>
+    <!-- 包扫描，只要标注了@Controller @Service @Repository @Componet 的文件在这个地址包下面，将xml中bean放到对应的class中实例化放到容器中 -->
+    <context:component-scan base-package="com.syy"></context:component-scan>
     <!-- 以前开发 的bean.xml里面配置bean -->
     <bean id="person" class="com.syy.bean.Person">
         <property name="age" value="18"></property>
         <property name="name" value="zhangsan"></property>
     </bean>
+    <!-- 开启注解aop配置，与@EnableAspectJAutoProxy对应效果 -->
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 </beans>
